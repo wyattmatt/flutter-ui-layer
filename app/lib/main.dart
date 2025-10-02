@@ -4,18 +4,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 
-import 'main_development.dart' as development;
+import 'config/dependencies.dart';
 import 'routing/router.dart';
 import 'ui/core/localization/applocalization.dart';
 import 'ui/core/themes/theme.dart';
 import 'ui/core/ui/scroll_behavior.dart';
 
 /// Default main method
+/// Uses simple authentication - shows login screen, accepts any credentials
 void main() {
-  // Launch development config by default
-  development.main();
+  Logger.root.level = Level.ALL;
+
+  runApp(MultiProvider(providers: providersSimpleAuth, child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
